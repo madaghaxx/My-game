@@ -6,14 +6,14 @@ if (player) {
   player.style.left = player.style.left || "0px";
   addEventListener("keydown", (e) => {
     let left = parseInt(player.style.left) || 0;
-    if (e.key == "ArrowRight") {
+    if (e.key == "ArrowRight" || e.key == "d") {
       if (
         !(parseInt(player.style.left) + player.offsetWidth >= boxPos.right - 10)
       ) {
         player.style.left = left + 10 + "px";
       }
     }
-    if (e.key == "ArrowLeft") {
+    if (e.key == "ArrowLeft" || e.key == "a") {
       if (!(parseInt(player.style.left) <= boxPos.left + 10)) {
         player.style.left = left - 10 + "px";
       }
