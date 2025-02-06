@@ -6,17 +6,21 @@ body{
     
 }
 .the-all{
-    flex: auto;
-    flex-wrap: wrap;
     background-color: rgb(72, 71, 71);
     width: 50em;
     height: 50em;
 }
 .player{
     position: relative;
-    /* border-style:solid; */
-    /* border-radius: 20px; */
    background-color: rgb(255, 0, 0);
     width: 5em;
     height: 5em;    
+}
+
+.bullet{
+    position:relative;
+    background-color: blue;
+    height: 1em;
+    width: 0.5em;
+    z-index: 100;
 }
