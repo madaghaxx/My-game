@@ -6,7 +6,7 @@ let playerPos = player.getBoundingClientRect();
 if (player) {
   player.style.top = boxPos.height - player.offsetHeight - 1 + "px";
   player.style.left = boxPos.left + "px";
-  addEventListener("keydown", async (e) => {
+  addEventListener("keydown", (e) => {
     playerPos = player.getBoundingClientRect();
     let left = parseInt(player.style.left) || 0;
     if (e.key == "ArrowRight" || e.key == "d") {
@@ -21,16 +21,18 @@ if (player) {
     }
     if (e.key == " ") {
       const shot = document.createElement("div");
+      const shotPos = shot.getBoundingClientRect();
       shot.classList.add("bullet");
-      shot.style.left = playerPos.left + playerPos.width / 2 + "px";
-      shot.style.top = playerPos.top + "px";
+      shot.style.left =
+        playerPos.left + playerPos.width / 2 - shotPos.width / 2 + "px";
+      shot.style.top = playerPos.top - playerPos.height + "px";
       box.append(shot);
-      await shotmove(shot);
+      shotmove(shot);
     }
   });
 }
 
-const shotmove = async (shot) => {
+const shotmove = (shot) => {
   const interval = setInterval(() => {
     let shotPos = shot.getBoundingClientRect();
     if (shotPos.top > 0) {
@@ -39,5 +41,5 @@ const shotmove = async (shot) => {
       clearInterval(interval);
       shot.remove();
     }
-  }, 100);
+  }, 10);
 };
