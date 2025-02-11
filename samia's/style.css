@@ -7,19 +7,19 @@ html, body {
     align-items: center;
     height: 100vh;
     overflow: hidden;
-    background-image: url(image/backroundgame.jpg);
+    /* background-image: url(image/backrou.ndgame.jpg); */
 }
 
 .game-container {
     width: 900px;
     height: 700px;
     background-size: cover;
-    background-image:url(image/backroundgame.jpg) ;
+    background-color: #0b2a61;
+    /* background-image:url(image/backrou.ndgame.jpg) ; */
     background-position: center;
     position: relative;
 }
 
-/* Joueur */
 .player {
     position: absolute;
     width: 80px;
@@ -27,14 +27,12 @@ html, body {
     border: pink;
 }
 
-/* Invaders */
 .invader {
     position: absolute;
     width: 60px;
     height: 50px;
 }
 
-/* Projectiles */
 .projectile, .invader-projectile {
     position: absolute;
     width: 6px;
@@ -52,7 +50,6 @@ html, body {
     font-size: 24px;
     margin-bottom: 10px;
 }
-/* Style pour le popup de game over */
 .popup-overlay {
     position: fixed;
     top: 0;
@@ -64,9 +61,8 @@ html, body {
     align-items: center;
     z-index: 1000;
 }
-/*box general*/
 .popup {
-    background: url(image/startScreenBackground.png) no-repeat center;
+    /* background: url(image/startScreenBackground.png) no-repeat center; */
     background-size: cover; 
     padding: 50px;
     border-radius: 10px;
@@ -81,13 +77,11 @@ html, body {
 
 }
 
-/*game over*/
 .popup h2 {
     color: purple;
     font-size: 36px;
     margin-bottom: 20px;
 }
-/*score final*/
 .popup p {
     color: white;
     font-size: 24px;
@@ -108,7 +102,7 @@ html, body {
     font-size: 35px;
     border-radius: 5px;
     cursor: pointer;
-        margin-top: auto; /* Pousse le bouton vers le bas */
+        margin-top: auto;
 
 }
 .popup button:hover {
@@ -122,7 +116,7 @@ html, body {
     right: 0;
     bottom: 0;
     z-index: 20;
-    background: url(image/startScreenBackground.png) no-repeat center;
+    /* background: url(image/startScreenBackground.png) no-repeat center; */
     background-size: contain;
     flex-direction: column;
     display: flex;
@@ -179,27 +173,6 @@ html, body {
 }
 
 
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    background-color: #071b3d; /* Bleu foncé pour le fond */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    position: relative;
-}
-
-/* Création du ciel étoilé */
-.stars {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-}
 
 .star {
     position: absolute;
@@ -208,25 +181,26 @@ html, body {
     background-color: white;
     border-radius: 50%;
     animation: moveStar 18s linear infinite;
+    z-index: 100;
 }
 
-/* Animation des étoiles pour les faire bouger */
+
 @keyframes moveStar {
     0% {
         transform: translateY(0);
     }
     100% {
-        transform: translateY(-50vh); /* Déplacer les étoiles sur toute la hauteur de l'écran */
+        transform: translateY(-50vh); 
     }
 }
-/* Fond étoilé : occupe toute la fenêtre */
+
 .stars {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: -1; /* Met les étoiles derrière tout */
-    pointer-events: none; /* Empêche d'interagir avec */
+    z-index: 1; 
+    pointer-events: none; 
     overflow: hidden;
 }

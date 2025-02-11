@@ -1,34 +1,29 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Space Invaders</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="stars"></div> 
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="stars"></div>
     <div class="game-wrapper">
-        <div class="score-container">
-            <span>Score: </span><span id="score">0</span>
+      <div class="score-container">
+        <span>Score: </span><span id="score">0</span>
+        <div id="lives">Lives: <span id="livesCount">3</span></div>
+        <div id="FPS"></div>
+      </div>
+
+      <div class="game-container">
+        <div class="start-screen">
+          <h1>SPACE INVADERS</h1>
+          <button id="startButton">START</button>
         </div>
-        <div class="game-container">
-            <div class="start-screen">
-                <h1>SPACE INVADERS</h1>
-                <div class="instructions">
-                    <p>Utilisez les touches :</p>
-                    <ul>
-                        <li>'A' pour aller à gauche</li>
-                        <li>'D' pour aller à droite</li>
-                        <li>'ESPACE' pour tirer</li>
-                    </ul>
-                </div>
-                <button id="startButton">JOUER</button>
-            </div>
-        </div>
+      </div>
     </div>
-    
+
     <script src="main.js"></script>
-    <script src="starts.js"></script>
-</body>
+    <script type="module" src="starts.js"></script>
+  </body>
 </html>
