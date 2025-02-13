@@ -4,18 +4,20 @@ html, body {
     background-color: #071b3d;
     display: flex;
     justify-content: center;
-    /* align-items: center; */
-    /* height: 100%; */
-    /* overflow: hidden; */
-    /* box-sizing: border-box; */
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    box-sizing: border-box;
 }
 
 .game-container {
-    width: 800px;
-    height: 700px;
-    /* background-size: cover; */
+    width: 90vw;
+    max-width: 800px;
+    height: 80vh;
+    max-height: 700px;
     background-color: #092048;
-    /* background-position: center; */
+    background-size: cover;
+    background-position: center;
     position: relative;
 }
 
@@ -34,7 +36,7 @@ html, body {
 .projectile, .invader-projectile {
     position: absolute;
     width: 8px;
-    height: 15px;
+    height: 13px;
     background-color: red;
     border-radius: 3px;
 }
@@ -44,57 +46,59 @@ html, body {
 
 .score-container {
     color: wheat;
-    font-size: 5vh;
-    margin-bottom: 1vh;
+    font-size: 100%;
 }
 
 .popup-overlay {
     position: fixed;
-    width: 90vw;
-    height: 90vh;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 10;
-    top: 5vh;
 }
 
 .popup {
-    opacity: 70%;
+    opacity: 0.7;
     background-color: #0e2b5c;
-    background-size: cover;
     border-radius: 10px;
     text-align: center;
-    width: 80vw;
-    height: 40vh;
-    flex-direction: column;
+    width: 60%;
+    max-width: 500px;
+    padding: 30px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding-bottom: 30px;
 }
 
 .popup h2 {
     color: rgb(255, 0, 0);
-    font-size: 8vw;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
 }
+
 .popup p {
     color: white;
-    font-size: 8vw;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
 }
 
 .popup button {
     background: url(image/button.png) no-repeat center;
     background-size: contain;
-    width: 30vw;
+    width: 200px;
     color: white;
     border: none;
-    padding: 2vw;
-    font-size: 5vw;
+    padding: 15px;
+    font-size: 1.5rem;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: auto;
+    transition: transform 0.2s;
 }
+
 .popup button:hover {
     transform: scale(1.1);
 }
@@ -114,7 +118,7 @@ html, body {
 }
 .start-screen h1 {
     color: purple;
-    font-size: 5vw;
+    font-size: 300%;
     margin-bottom: 30px;
     text-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
 }
@@ -129,7 +133,7 @@ html, body {
     color: white;
     border: none;
     padding: 20px;
-    font-size: 5vw;
+    font-size: 400%;
     border-radius: 5px;
     cursor: pointer;
 }
@@ -162,19 +166,17 @@ html, body {
     pointer-events: none; 
     overflow: hidden;
 }
-
 @media (max-width: 768px) {
     .game-container {
-        width: 500px;
-        height: 700px;
+        width: 95vw;
+        height: 70vh;
     }
     .player, .invader {
-        width:40px;
-        height: 40px;
+        width: 12%;
+        height: 12%;
     }
     .projectile, .invader-projectile {
-        width: 3vw;
-        height: 3vh;
+        width: 1%;
     }
     .popup {
         width: 90vw;
@@ -196,22 +198,22 @@ html, body {
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 400px) {
     .game-container {
-        width: 100vw;
-        height: 50vh;
+        width: 95vw;
+        height: 60vh;
     }
     .player, .invader {
-        width: 20vw;
-        height: 20vh;
+        width: 15%;
+        height: 15%;
     }
     .projectile, .invader-projectile {
-        width: 4vw;
-        height: 4vh;
+        width: 2.5vw;
+        height: 2.5vh;
     }
     .popup {
-        width: 100vw;
-        height: 60vh;
+        width: 95vw;
+        height: 50vh;
     }
     .popup h2, .popup p {
         font-size: 5vw;

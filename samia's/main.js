@@ -1,11 +1,12 @@
 const scoreEl = document.querySelector("#score");
 const gameContainer = document.querySelector(".game-container");
+const gameContainerPOs= gameContainer.getBoundingClientRect()
 if (!scoreEl || !gameContainer) {
   console.error("Required DOM elements are missing.");
   throw new Error("Required DOM elements are missing.");
 }
 const player = {
-  position: { x: 410, y: 630 },
+  position: { x: 410, y: gameContainerPOs.height-60 },
   velocity: { x: 0 },
   width: 80,
   height: 60,
@@ -208,6 +209,7 @@ function restartGame() {
   frames = 0;
   gameActive = true;
   gameStarted = true;
+  paused = false;
   player.lives = 3;
   projectiles.forEach((p) => removeProjectile(p));
   projectiles.length = 0;
