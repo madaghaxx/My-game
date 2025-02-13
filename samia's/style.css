@@ -4,38 +4,36 @@ html, body {
     background-color: #071b3d;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
-    overflow: hidden;
-    /* background-image: url(image/backrou.ndgame.jpg); */
+    /* align-items: center; */
+    /* height: 100%; */
+    /* overflow: hidden; */
+    /* box-sizing: border-box; */
 }
 
 .game-container {
-    width: 900px;
+    width: 800px;
     height: 700px;
-    background-size: cover;
-    background-color: #0b2a61;
-    /* background-image:url(image/backrou.ndgame.jpg) ; */
-    background-position: center;
+    /* background-size: cover; */
+    background-color: #092048;
+    /* background-position: center; */
     position: relative;
 }
 
 .player {
     position: absolute;
-    width: 80px;
-    height: 60px;
-    border: pink;
+    width: 10%;
+    height: 10%;
 }
 
 .invader {
     position: absolute;
-    width: 60px;
-    height: 50px;
+    width: 8%;
+    height: 8%;
 }
 
 .projectile, .invader-projectile {
     position: absolute;
-    width: 6px;
+    width: 8px;
     height: 15px;
     background-color: red;
     border-radius: 3px;
@@ -44,71 +42,63 @@ html, body {
     background-color: yellow;
 }
 
-
 .score-container {
     color: wheat;
-    font-size: 24px;
-    margin-bottom: 10px;
+    font-size: 5vh;
+    margin-bottom: 1vh;
 }
+
 .popup-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    width: 90vw;
+    height: 90vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 10;
+    top: 5vh;
 }
+
 .popup {
-    /* background: url(image/startScreenBackground.png) no-repeat center; */
-    background-size: cover; 
-    padding: 50px;
+    opacity: 70%;
+    background-color: #0e2b5c;
+    background-size: cover;
     border-radius: 10px;
     text-align: center;
-    width: 850px;
-    height: 400px;
+    width: 80vw;
+    height: 40vh;
     flex-direction: column;
     display: flex;
     align-items: center;
     justify-content: center;
     padding-bottom: 30px;
-
 }
 
 .popup h2 {
-    color: purple;
-    font-size: 36px;
-    margin-bottom: 20px;
+    color: rgb(255, 0, 0);
+    font-size: 8vw;
 }
 .popup p {
     color: white;
-    font-size: 24px;
-    margin-bottom: 5px;
+    font-size: 8vw;
 }
-#scorp{
-    font-size: 90px;
-    margin-top: 15px;
-}
+
 .popup button {
- background: url(image/button.png) no-repeat center;
+    background: url(image/button.png) no-repeat center;
     background-size: contain;
-    width: 200px;
-    height: 80px;
+    width: 30vw;
     color: white;
     border: none;
-    padding: 20px;
-    font-size: 35px;
+    padding: 2vw;
+    font-size: 5vw;
     border-radius: 5px;
     cursor: pointer;
-        margin-top: auto;
-
+    margin-top: auto;
 }
 .popup button:hover {
-    
     transform: scale(1.1);
 }
+
 .start-screen {
     position: absolute;
     top: 0;
@@ -116,47 +106,19 @@ html, body {
     right: 0;
     bottom: 0;
     z-index: 20;
-    /* background: url(image/startScreenBackground.png) no-repeat center; */
     background-size: contain;
     flex-direction: column;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
-
 .start-screen h1 {
     color: purple;
-    font-size: 48px;
+    font-size: 5vw;
     margin-bottom: 30px;
     text-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
 }
-
-.instructions {
-    color: white;
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.instructions p {
-    font-size: 24px;
-    margin-bottom: 15px;
-}
-
-.instructions ul {
-    list-style: none;
-    padding: 0;
-}
-
-.instructions li {
-    font-size: 18px;
-    margin: 10px 0;
-}
-
-
-
 #startButton:hover {
-    
     transform: scale(1.1);
 }
 #startButton {
@@ -167,33 +129,29 @@ html, body {
     color: white;
     border: none;
     padding: 20px;
-    font-size: 35px;
+    font-size: 5vw;
     border-radius: 5px;
     cursor: pointer;
 }
 
-
-
 .star {
     position: absolute;
-    width: 3px;
-    height: 3px;
+    width: 1vw;
+    height: 1vh;
     background-color: white;
     border-radius: 50%;
     animation: moveStar 18s linear infinite;
-    z-index: 100;
+    z-index: 1000;
 }
-
 
 @keyframes moveStar {
     0% {
-        transform: translateY(0);
+        transform: translateY(-10vh);
     }
     100% {
         transform: translateY(-50vh); 
     }
 }
-
 .stars {
     position: fixed;
     top: 0;
@@ -203,4 +161,70 @@ html, body {
     z-index: 1; 
     pointer-events: none; 
     overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    .game-container {
+        width: 500px;
+        height: 700px;
+    }
+    .player, .invader {
+        width:40px;
+        height: 40px;
+    }
+    .projectile, .invader-projectile {
+        width: 3vw;
+        height: 3vh;
+    }
+    .popup {
+        width: 90vw;
+        height: 50vh;
+    }
+    .popup h2, .popup p {
+        font-size: 6vw;
+    }
+    .popup button {
+        width: 40vw;
+        font-size: 4vw;
+    }
+    .start-screen h1 {
+        font-size: 6vw;
+    }
+    #startButton {
+        padding: 15px;
+        font-size: 4vw;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-container {
+        width: 100vw;
+        height: 50vh;
+    }
+    .player, .invader {
+        width: 20vw;
+        height: 20vh;
+    }
+    .projectile, .invader-projectile {
+        width: 4vw;
+        height: 4vh;
+    }
+    .popup {
+        width: 100vw;
+        height: 60vh;
+    }
+    .popup h2, .popup p {
+        font-size: 5vw;
+    }
+    .popup button {
+        width: 50vw;
+        font-size: 3vw;
+    }
+    .start-screen h1 {
+        font-size: 5vw;
+    }
+    #startButton {
+        padding: 10px;
+        font-size: 3vw;
+    }
 }

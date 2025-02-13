@@ -1,11 +1,9 @@
 const scoreEl = document.querySelector("#score");
 const gameContainer = document.querySelector(".game-container");
-
 if (!scoreEl || !gameContainer) {
   console.error("Required DOM elements are missing.");
   throw new Error("Required DOM elements are missing.");
 }
-
 const player = {
   position: { x: 410, y: 630 },
   velocity: { x: 0 },
@@ -17,7 +15,6 @@ const player = {
   shootInterval: 20,
   lives: 3,
 };
-
 const projectiles = [];
 const invaderProjectiles = [];
 const grids = [];
@@ -27,7 +24,6 @@ let score = 0;
 let gameStarted = false;
 let gameActive = true;
 let paused = false;
-
 function createElement(tag, className, src) {
   const element = document.createElement(tag);
   if (className) element.classList.add(className);
@@ -35,17 +31,14 @@ function createElement(tag, className, src) {
   gameContainer.appendChild(element);
   return element;
 }
-
 function createPlayer() {
   player.element = createElement("img", "player", player.imageSrc);
   drawPlayer();
 }
-
 function drawPlayer() {
   player.element.style.left = `${player.position.x}px`;
   player.element.style.top = `${player.position.y}px`;
 }
-
 function shoot(currentFrame) {
   if (currentFrame - player.lastShootFrame >= player.shootInterval) {
     projectiles.push({
@@ -59,17 +52,14 @@ function shoot(currentFrame) {
     player.lastShootFrame = currentFrame;
   }
 }
-
 function updateProjectile(projectile) {
   projectile.position.y += projectile.velocity.y;
   projectile.element.style.left = `${projectile.position.x}px`;
   projectile.element.style.top = `${projectile.position.y}px`;
 }
-
 function removeProjectile(projectile) {
   projectile.element.remove();
 }
-
 function createInvader(position) {
   const invader = {
     position: { ...position },
@@ -81,13 +71,11 @@ function createInvader(position) {
   updateInvader(invader);
   return invader;
 }
-
 function updateInvader(invader, velocity = invader.velocity) {
   invader.position.x += velocity.x;
   invader.element.style.left = `${invader.position.x}px`;
   invader.element.style.top = `${invader.position.y}px`;
 }
-
 function shootInvader(invader) {
   invaderProjectiles.push({
     position: {
@@ -98,15 +86,14 @@ function shootInvader(invader) {
     element: createElement("div", "invader-projectile"),
   });
 }
-
 function createGrid() {
   const grid = {
     position: { x: 0, y: 0 },
     velocity: { x: 2, y: 0 },
     invaders: [],
   };
-  const rows = Math.floor(Math.random() * 3 + 3);
-  const cols = Math.floor(Math.random() * 5 + 4);
+  const rows = 3;
+  const cols = 6;
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
       grid.invaders.push(createInvader({ x: j * 70, y: i * 55 }));
@@ -114,7 +101,6 @@ function createGrid() {
   }
   return grid;
 }
-
 function updateGrid(grid) {
   grid.position.x += grid.velocity.x;
   const leftmostInvader = Math.min(
@@ -128,11 +114,9 @@ function updateGrid(grid) {
     leftmostInvader < 0
   ) {
     grid.velocity.x *= -1;
-    grid.invaders.forEach((inv) => (inv.position.y += 10));
   }
   grid.invaders.forEach((inv) => updateInvader(inv, grid.velocity));
 }
-
 function checkCollision(projectile, collided) {
   return (
     projectile.position.x >= collided.position.x &&
@@ -141,12 +125,18 @@ function checkCollision(projectile, collided) {
     projectile.position.y <= collided.position.y + collided.height
   );
 }
-
+function showEndScreen() {
+  const overlay = createElement("div", "popup-overlay");
+  const popup = createElement("div", "popup");
+  popup.innerHTML = `<h2>YOU WIN!</h2><p>Final Score: </p><p id="score">${score}</p><button onclick="restartGame()">Restart</button>`;
+  overlay.appendChild(popup);
+  player.velocity.x = 0;
+  keys.space = false;
+}
 function animate() {
   if (!gameActive || !gameStarted || paused) return;
   if (keys.space) shoot(frames);
   movePlayer();
-
   projectiles.forEach((p, i) => {
     updateProjectile(p);
     if (p.position.y < 0) {
@@ -154,7 +144,6 @@ function animate() {
       projectiles.splice(i, 1);
     }
   });
-
   grids.forEach((grid) => {
     updateGrid(grid);
     grid.invaders.forEach((invader, invIndex) => {
@@ -169,14 +158,12 @@ function animate() {
         }
       });
     });
-
-    if (Math.random() < 0.02 && grid.invaders.length > 0) {
+    if (Math.random() < 0.05 && grid.invaders.length > 0) {
       const randomInvader =
         grid.invaders[Math.floor(Math.random() * grid.invaders.length)];
       if (randomInvader) shootInvader(randomInvader);
     }
   });
-
   invaderProjectiles.forEach((p, i) => {
     updateProjectile(p);
     if (p.position.y > 700) {
@@ -195,14 +182,13 @@ function animate() {
       }
     }
   });
-
-  if (
-    frames % 1000 === 0 &&
-    grids.every((grid) => grid.invaders.length === 0)
-  ) {
+  if (frames === 0 && gameStarted) {
     grids.push(createGrid());
   }
-
+  if (grids.every((grid) => grid.invaders.length === 0)) {
+    gameActive = false;
+    showEndScreen();
+  }
   frames++;
   requestAnimationFrame(animate);
 }
@@ -215,7 +201,6 @@ function movePlayer() {
   );
   drawPlayer();
 }
-
 function restartGame() {
   document.querySelector(".popup-overlay")?.remove();
   score = 0;
@@ -224,12 +209,10 @@ function restartGame() {
   gameActive = true;
   gameStarted = true;
   player.lives = 3;
-
   projectiles.forEach((p) => removeProjectile(p));
   projectiles.length = 0;
   invaderProjectiles.forEach((p) => removeProjectile(p));
   invaderProjectiles.length = 0;
-
   grids.forEach((grid) =>
     grid.invaders.forEach((invader) => invader.element.remove())
   );
@@ -237,11 +220,10 @@ function restartGame() {
 
   player.position = { x: 410, y: 630 };
   player.velocity = { x: 0 };
+  player.lastShootFrame = 0;
   drawPlayer();
-
   animate();
 }
-
 function showGameOver() {
   const overlay = createElement("div", "popup-overlay");
   const popup = createElement("div", "popup");
@@ -250,7 +232,6 @@ function showGameOver() {
   player.velocity.x = 0;
   keys.space = false;
 }
-
 function togglePause() {
   paused = !paused;
   if (!paused) {
@@ -260,14 +241,12 @@ function togglePause() {
     showPauseMenu();
   }
 }
-
 function showPauseMenu() {
   const overlay = createElement("div", "popup-overlay");
   const popup = createElement("div", "popup");
   popup.innerHTML = `<h2>PAUSED</h2><button onclick="togglePause()">Continue</button><button onclick="restartGame()">Restart</button>`;
   overlay.appendChild(popup);
 }
-
 document.getElementById("startButton").addEventListener("click", () => {
   document.querySelector(".start-screen").style.display = "none";
   gameStarted = true;
@@ -275,14 +254,12 @@ document.getElementById("startButton").addEventListener("click", () => {
   createPlayer();
   animate();
 });
-
 window.addEventListener("keydown", (event) => {
   if (event.key === "ArrowLeft") player.velocity.x = -5;
   if (event.key === "ArrowRight") player.velocity.x = 5;
   if (event.key === " ") keys.space = true;
   if (event.key === "Escape") togglePause();
 });
-
 window.addEventListener("keyup", (event) => {
   if (event.key === "ArrowRight" || event.key === "ArrowLeft")
     player.velocity.x = 0;

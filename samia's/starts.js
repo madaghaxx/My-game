@@ -1,5 +1,3 @@
-import { fpsMeter } from "./fps.js";
-fpsMeter();
 document.addEventListener("DOMContentLoaded", function () {
   const starContainer = document.querySelector(".stars");
   const numberOfStars = 100;
